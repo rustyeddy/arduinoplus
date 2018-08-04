@@ -1,0 +1,3 @@
+export ARDUINO_DIR=/Users/rusty/Applications/Arduino.app/Contents/Java
+export ARDMK_DIR=../vendor/Arduino-Makefile
+export AVR_TOOLS_DIR=/Users/rusty/Applications/Arduino.app/Contents/Java/hardware/tools/avr
