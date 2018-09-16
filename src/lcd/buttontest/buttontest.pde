@@ -33,7 +33,7 @@ void setup()
 {
  lcd.begin(16, 2);              // start the library
  lcd.setCursor(0,0);
- lcd.print("Push the buttons"); // print a simple message
+ lcd.print("Push the Rusty Button"); // print a simple message
 }
   
 void loop()

@@ -113,14 +113,15 @@ String ScrollTextField[ScrollTextLength] = {
   "                ",
   "Scroll Text Demo",
   "                ",
-  "egg             ",
-  "   egg          ",
-  "     egg        ",
-  "      egg       ",
-  "      egg       ",
-  "    splash      ",
-  "----((..))------",
-  "need new egg ;^)"};
+  "rusty|          ",
+  " usty|E         ",
+  "  sty|Ed        ",
+  "   ty|Edd       ",
+  "    y|Eddy      ",
+  "      Eddy      ",
+  "~= Rusty Eddy =~",
+  "    ~~~~~~      "
+};
 
 void setup() {
   // create a new character
@@ -275,12 +276,3 @@ void ScrollText (int sdelay) {
     delay(sdelay);
   }
 }
-
-
-
-
-
-
-
-
-
