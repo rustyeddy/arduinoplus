@@ -12,7 +12,7 @@ OseppTBMotor Motor2(8, 3);
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(9600);
+  Serial.begin(115200);
   pinMode(13, OUTPUT);
 }
 
@@ -31,13 +31,18 @@ const int controlMode_Joystick = 1;
 const int controlMode_Gravity = 2;
 int controlMode = controlMode_Button;
 
-void loop2() {
-  delay(1000);
+void loop() {
+  digitalWrite(13, HIGH);
   setMotors(100, 100);
+  delay(2000);
+  digitalWrite(13, LOW);
+  setMotors(200, 200);
   Serial.println("around we go");
 }
-void loop() {
+
+void loop1() {
   // put your main code here, to run repeatedly:
+  setMotors(200, 200);
   delay(40);//oseppRemote send data per 40ms
   while (Serial.available() > 0)remote.feed(Serial.read());
   if (remote.isTimeoutFor(200)) {
