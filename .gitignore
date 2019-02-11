@@ -4,3 +4,4 @@
 build-uno
 vendor
 bin
+.DS_Store
