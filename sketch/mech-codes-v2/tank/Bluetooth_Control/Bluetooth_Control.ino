@@ -33,7 +33,7 @@ int controlMode = controlMode_Button;
 
 void loop() {
   digitalWrite(13, HIGH);
-  setMotors(100, 100);
+  setMotors          v(100, 100);
   delay(2000);
   digitalWrite(13, LOW);
   setMotors(200, 200);
