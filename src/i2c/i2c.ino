@@ -23,14 +23,13 @@ void loop() {
   delay(100); // stop us from having a spinning loop.
 }
 
-void
-receiveData(int byteCount) {
+void receiveData(int byteCount) {
   while(Wire.available()) {
     number = Wire.read();
     Serial.print("data recieved ");
     Serial.println(number);
 
-    if (number == 1) {
+    if (state == 0) {
       digitalWrite(13, HIGH);  // set led on
       state = 1;
     } else {
@@ -40,7 +39,6 @@ receiveData(int byteCount) {
   }
 }
  
-void 
-sendData() {
+void sendData() {
   Wire.write(number);
 }
