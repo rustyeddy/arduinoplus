@@ -6,3 +6,4 @@ vendor
 bin
 .vscode
 .DS_Store
+bin/uno
