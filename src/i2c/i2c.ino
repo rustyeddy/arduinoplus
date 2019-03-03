@@ -20,10 +20,13 @@ void setup() {
 
 void loop() {
   // The loop is not used since i2c is driven by interrupts
-  delay(100); // stop us from having a spinning loop.
+  delay(1000); // stop us from having a spinning loop.
 }
 
 void receiveData(int byteCount) {
+
+  Serial.print("receive data ");
+  Serial.println(byteCount);
   while(Wire.available()) {
     number = Wire.read();
     Serial.print("data recieved ");
