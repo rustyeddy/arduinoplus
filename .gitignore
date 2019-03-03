@@ -2,8 +2,8 @@
 *.d
 *.o
 build-uno
-vendor
-bin
 .vscode
 .DS_Store
 bin/uno
+src/lcd/bin
+src/bin
