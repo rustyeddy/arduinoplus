@@ -1,13 +1,15 @@
 #include <Wire.h>
 
 #define SLAVE_ADDRESS 0x04
+
+
 int number = 0;
 int state  = 0;
 
 void setup() {
   // put your setup code here, to run once:
   pinMode(13, OUTPUT);
-  Serial.begin(115200); // make sure this is not too fast for other sensors
+  Serial.begin(9600); // make sure this is not too fast for other sensors
 
   // init i2c as slave 
   Wire.begin(SLAVE_ADDRESS);
@@ -19,8 +21,10 @@ void setup() {
 }
 
 void loop() {
+  Serial.println("top of loop");
   // The loop is not used since i2c is driven by interrupts
   delay(1000); // stop us from having a spinning loop.
+  digitalWrite(13, LOW);
 }
 
 void receiveData(int byteCount) {
