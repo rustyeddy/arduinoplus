@@ -2,7 +2,7 @@ BOARDS = /Applications/Arduino/Content/Java/hardware/arduino/avr/boards.txt
 
 # ARDMK_DIR=/Users/rusty/src/arduino/vendor/Arduino-Makefile/Arduino.mk
 # ARDIUNO_DIR = /Users/rusty/Applications/Arduino/Content/Java
-# ARDIUNO_LIBS =
+# ARDUINO_LIBS = SR04
 # BOARD_TAG = uno
 # include /Users/rusty/src/arduino/vendor/Arduino-Makefile/Arduino.mk
 
@@ -17,7 +17,7 @@ BOARDS = /Applications/Arduino/Content/Java/hardware/arduino/avr/boards.txt
 
 ### PROJECT_DIR
 ### This is the path to where you have created/cloned your project
-PROJECT_DIR       = /Users/rusty/src/arduino/src/blink
+PROJECT_DIR       = /Users/rusty/src/arduino/src/tlv
 
 ### ARDMK_DIR
 ### Path to the Arduino-Makefile directory.
@@ -32,9 +32,8 @@ ARDUINO_DIR       = /Applications/Arduino.app/Contents/Java
 
 ### USER_LIB_PATH
 ### Path to where the your project's libraries are stored.
-USER_LIB_PATH    :=  $(PROJECT_DIR)/lib
+USER_LIB_PATH    :=  /Users/rusty/src/arduino/src/libraries
 
-### BOARD_TAG
 ### It must be set to the board you are currently using. (i.e uno, mega2560, etc.)
 # BOARD_TAG         = uno
 BOARD_TAG = nano
@@ -76,7 +75,7 @@ CXXFLAGS         += -pedantic -Wall -Wextra
 ### MONITOR_PORT
 ### The port your board is connected to. Using an '*' tries all the ports and finds the right one.
 # MONITOR_PORT      = /dev/tty.usbmodem*
-MONITOR_PORT 		= /dev/tty.usbserial-AI02RF10
+MONITOR_PORT 		= /dev/tty.usbserial-14110
 
 ### CURRENT_DIR
 ### Do not touch - used for binaries path

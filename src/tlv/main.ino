@@ -1,8 +1,12 @@
 #include <SR04.h>
+#include "tlv.h"
+
 #define TRIG_PIN 12
 #define ECHO_PIN 11
 SR04 sr04 = SR04(ECHO_PIN,TRIG_PIN);
 long a;
+
+TLV tlv = TLV();
 
 void setup() {
    Serial.begin(115200);
@@ -16,19 +20,3 @@ void loop() {
   Serial.println("cm");
   delay(100);
 }
-
-// -----------------------------------------
-// TLV
-// -----------------------------------------
-#define MAX_DATA 16
-
-class TLV
-{
-public:
-    byte type;
-    byte len;
-    char buffer[MAX_DATA];
-
-    TLV *Get();
-    int Send(char *buf);
-};

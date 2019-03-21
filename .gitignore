@@ -7,3 +7,4 @@ build-uno
 bin/uno
 src/lcd/bin
 src/bin
+src/tlv/bin
