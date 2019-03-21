@@ -1,8 +1,11 @@
 #include <Wire.h>
 
-#define SLAVE_ADDRESS 0x04
+#define SLAVE_ADDRESS 0x12
 int number = 0;
 int state  = 0;
+
+void receiveData(int byteCount);
+void sendData();
 
 void setup() {
   // put your setup code here, to run once:
