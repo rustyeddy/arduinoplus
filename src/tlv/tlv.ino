@@ -1,15 +1,9 @@
 //www.elegoo.com
 //2016.12.09
 
-class Joystick {
-public:
-  int pinX, pinY, pinSW;
-  int x, y, sw;
+#include "joystick.h"
 
-  Joystick(int px, int py, int psw);
-  void Report();
-  
-};
+Joystick *joy;
 
 // Arduino pin numbers
 const int SW_pin = 2; // digital pin connected to switch output
@@ -17,19 +11,11 @@ const int X_pin = 0; // analog pin connected to X output
 const int Y_pin = 1; // analog pin connected to Y output
 
 void setup() {
-  pinMode(SW_pin, INPUT);
-  digitalWrite(SW_pin, HIGH);
+  joy = new Joystick(X_pin, Y_pin, SW_pin);
   Serial.begin(9600);
 }
 
 void loop() {
-  int x, y, sw;
-  sw = digitalRead(SW_pin);
-  x = analogRead(X_pin);
-  y = analogRead(Y_pin);
-
-  Serial.print("j:"); Serial.print(sw);
-  Serial.print(":"); Serial.print(x);
-  Serial.print(":"); Serial.println(y);
+  joy->Report();
   delay(100);
 }
