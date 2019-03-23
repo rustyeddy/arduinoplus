@@ -1,32 +1,35 @@
-// -*- c-mode -*-
+//www.elegoo.com
+//2016.12.09
 
-#include <SR04.h>
+class Joystick {
+public:
+  int pinX, pinY, pinSW;
+  int x, y, sw;
 
-#define TRIG_PIN 12
-#define ECHO_PIN 11
-SR04 sr04 = SR04(ECHO_PIN,TRIG_PIN);
-long dist;
+  Joystick(int px, int py, int psw);
+  void Report();
+  
+};
 
-char buffer[8];
+// Arduino pin numbers
+const int SW_pin = 2; // digital pin connected to switch output
+const int X_pin = 0; // analog pin connected to X output
+const int Y_pin = 1; // analog pin connected to Y output
 
 void setup() {
-   Serial.begin(9600);
-   delay(1000);
-   buffer[0] = 'c';
-   buffer[1] = 'm';
-   buffer[2] = ':';
-   buffer[3] = 0;
+  pinMode(SW_pin, INPUT);
+  digitalWrite(SW_pin, HIGH);
+  Serial.begin(9600);
 }
 
 void loop() {
-  sendDistance();
-  delay(100);
-}
+  int x, y, sw;
+  sw = digitalRead(SW_pin);
+  x = analogRead(X_pin);
+  y = analogRead(Y_pin);
 
-void sendDistance() {
-  //a = sr04.DistanceAvg(10, 5);
-  dist = sr04.Distance();
- 
-  Serial.print(buffer);
-  Serial.println(dist);
+  Serial.print("j:"); Serial.print(sw);
+  Serial.print(":"); Serial.print(x);
+  Serial.print(":"); Serial.println(y);
+  delay(100);
 }

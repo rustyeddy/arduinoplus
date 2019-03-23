@@ -1,6 +1,14 @@
 //www.elegoo.com
 //2016.12.09
 
+class Joystick {
+public:
+  int pinX, pinY, pinSW;
+  int x, y, sw;
+};
+
+  
+
 // Arduino pin numbers
 const int SW_pin = 2; // digital pin connected to switch output
 const int X_pin = 0; // analog pin connected to X output
