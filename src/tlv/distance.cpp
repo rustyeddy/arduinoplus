@@ -1,12 +1,11 @@
 // -*- c-mode -*-
 
-#include <SR04.h>
 #include "distance.h"
 
-#define TRIG_PIN 12
-#define ECHO_PIN 11
+#include <SR04.h>
+
 SR04 sr04 = SR04(ECHO_PIN,TRIG_PIN);
-long dist;
+
 
 char buffer[8];
 
@@ -24,18 +23,7 @@ Distance::Distance(int trig, int echo) {
 
 void Distance::Report() {
   //a = sr04.DistanceAvg(10, 5);
-  dist = sr04.Distance();
-  
+  long cm = sr04.Distance();
+  Serial.print("cm:");
+  Serial.println(cm);
 }
-
-void sendDistance() {
- 
-  Serial.print(buffer);
-  Serial.println(dist);
-}
-
-void loopDistance() {
-  sendDistance();
-  delay(100);
-}
-
