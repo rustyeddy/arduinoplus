@@ -1,5 +1,8 @@
-#ifndef _JOYSTICK_H_
-#define _JOYSTICK_H_
+#ifndef _DISTANCE_H_
+#define _DISTANCE_H_
+
+#define TRIG_PIN 12
+#define ECHO_PIN 11
 
 class Distance {
 public:
@@ -10,4 +13,4 @@ public:
 };
 
 
-#endif // _JOYSTICK_H_
+#endif // _DISTANCE_H_

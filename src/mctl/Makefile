@@ -75,8 +75,8 @@ CXXFLAGS         += -pedantic -Wall -Wextra
 ### MONITOR_PORT
 ### The port your board is connected to. Using an '*' tries all the ports and finds the right one.
 # MONITOR_PORT      = /dev/tty.usbmodem*
-# MONITOR_PORT 		= /dev/tty.usbserial-14110
-MONITOR_PORT	= /dev/tty.wchusbserial1420
+MONITOR_PORT 		= /dev/tty.usbserial-14110
+# MONITOR_PORT	= /dev/tty.wchusbserial1420
 
 ### CURRENT_DIR
 ### Do not touch - used for binaries path

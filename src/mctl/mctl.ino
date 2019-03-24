@@ -1,21 +1,19 @@
-//www.elegoo.com
-//2016.12.09
+// Mobile Robot I/O 2019-03-04
 
 #include "joystick.h"
+#include "distance.h"
 
 Joystick *joy;
-
-// Arduino pin numbers
-const int SW_pin = 2; // digital pin connected to switch output
-const int X_pin = 0; // analog pin connected to X output
-const int Y_pin = 1; // analog pin connected to Y output
+Distance *dist;
 
 void setup() {
   joy = new Joystick(X_pin, Y_pin, SW_pin);
+  //dist = new Distance(TRIG_PIN, ECHO_PIN);
   Serial.begin(9600);
 }
 
 void loop() {
   joy->Report();
+  //dist->Report();
   delay(100);
 }
