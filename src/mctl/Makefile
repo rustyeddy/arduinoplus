@@ -17,7 +17,7 @@ ARDUINO_LIBS = HC-SR04
 
 ### PROJECT_DIR
 ### This is the path to where you have created/cloned your project
-PROJECT_DIR       = /Users/rusty/src/arduino/src/tlv
+PROJECT_DIR       = /Users/rusty/src/arduino/src/mctl
 
 ### ARDMK_DIR
 ### Path to the Arduino-Makefile directory.
