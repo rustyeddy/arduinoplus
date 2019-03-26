@@ -7,13 +7,19 @@ Joystick *joy;
 Distance *dist;
 
 void setup() {
-  joy = new Joystick(X_pin, Y_pin, SW_pin);
-  //dist = new Distance(TRIG_PIN, ECHO_PIN);
   Serial.begin(9600);
 }
 
 void loop() {
-  joy->Report();
-  //dist->Report();
-  delay(100);
+
+  if (dist == NULL && joy == NULL) {
+    Serial.println("nothing to do, wait for a config change");
+  }
+  if (dist != NULL) {
+    dist->Report();
+  }
+  if (joy != NULL) {
+    joy->Report();
+  }
+  delay(2000);
 }

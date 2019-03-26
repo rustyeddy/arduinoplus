@@ -1,18 +1,36 @@
 #ifndef _JOYSTICK_H_
 #define _JOYSTICK_H_
 
-// Arduino pin numbers
-const int SW_pin = 2; // digital pin connected to switch output
-const int X_pin = 0; // analog pin connected to X output
-const int Y_pin = 1; // analog pin connected to Y output
-
 class Joystick {
-public:
-  int pinX, pinY, pinSW;
-  int x, y, sw;
+private:
+  int active = 0;
+  int pinX = 0;
+  int pinY = 1;
+  int pinSW = 2;
 
-  Joystick(int px, int py, int psw);
-  void Report();
+public:
+  Joystick() {
+  }
+
+  Joystick(int x, int y, int sw) {
+    Setup(x, y, sw);
+  }
+  void Setup(int x, int y, int sw) {
+    pinX = x;
+    pinY = y;
+    pinSW = sw;
+    pinMode(pinSW, INPUT);
+    digitalWrite(pinSW, HIGH);
+  };
+  
+  void Report() {
+    int sw = digitalRead(pinSW);
+    int x = analogRead(pinX);
+    int y = analogRead(pinY);
+    Serial.print("j:"); Serial.print(sw);
+    Serial.print(":"); Serial.print(x);
+    Serial.print(":"); Serial.println(y);
+  }
 };
 
 

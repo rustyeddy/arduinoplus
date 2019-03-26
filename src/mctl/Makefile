@@ -86,7 +86,7 @@ CURRENT_DIR       = $(shell basename $(CURDIR))
 ### This is where you put the binaries you just compile using 'make'
 OBJDIR            = $(PROJECT_DIR)/bin/$(BOARD_TAG)/$(CURRENT_DIR)
 
-USER_LIBRARIES 	= HC-SRO4
+USER_LIBRARIES 	= HC-SRO4 Wire
 
 ### Do not touch - the path to Arduino.mk, inside the ARDMK_DIR
 include $(ARDMK_DIR)/Arduino.mk
