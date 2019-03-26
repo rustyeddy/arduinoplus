@@ -3,15 +3,20 @@
 #include "joystick.h"
 #include "distance.h"
 
-Joystick *joy;
+// Configurable variables
+int delay_time = 100;
+
+Joystick *joy = new Joystick();
 Distance *dist;
 
 void setup() {
   Serial.begin(9600);
+  if (joy != 0) {
+    joy->ReportChanges(1);
+  }
 }
 
 void loop() {
-
   if (dist == NULL && joy == NULL) {
     Serial.println("nothing to do, wait for a config change");
   }
@@ -21,5 +26,5 @@ void loop() {
   if (joy != NULL) {
     joy->Report();
   }
-  delay(2000);
+  delay(delay_time);
 }

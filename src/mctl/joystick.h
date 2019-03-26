@@ -7,30 +7,16 @@ private:
   int pinX = 0;
   int pinY = 1;
   int pinSW = 2;
+  int lastX, lastY, lastSW;
+  int report_changes = 0;
 
 public:
-  Joystick() {
-  }
+  Joystick();
+  Joystick(int x, int y, int sw);
 
-  Joystick(int x, int y, int sw) {
-    Setup(x, y, sw);
-  }
-  void Setup(int x, int y, int sw) {
-    pinX = x;
-    pinY = y;
-    pinSW = sw;
-    pinMode(pinSW, INPUT);
-    digitalWrite(pinSW, HIGH);
-  };
-  
-  void Report() {
-    int sw = digitalRead(pinSW);
-    int x = analogRead(pinX);
-    int y = analogRead(pinY);
-    Serial.print("j:"); Serial.print(sw);
-    Serial.print(":"); Serial.print(x);
-    Serial.print(":"); Serial.println(y);
-  }
+  void Setup(int x, int y, int sw);
+  void ReportChanges(int yes);
+  void Report();
 };
 
 
