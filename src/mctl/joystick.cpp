@@ -53,6 +53,10 @@ Joystick::Report() {
     Serial.print(":"); Serial.println(y);
   }
 
+  // Alternative
+  // msg[0] = 'j'; msg[1] = 6; msg[2:3] = x; y = msg[4:5]; sw = msg[6];
+  // TLV above
+
  finished:
   lastX = x;
   lastY = y;

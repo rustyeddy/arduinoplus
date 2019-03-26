@@ -48,7 +48,7 @@ MONITOR_BAUDRATE  = 115200
 ### On OS X with `homebrew`:
 
 # /Users/rusty/Applications/Arduino.app/Contents/Java/hardware/tools/avr/bin/avr-g++
-AVR_TOOLS_DIR     = /usr/local
+# AVR_TOOLS_DIR     = /usr/local
 AVR_TOOLS_DIR     = /Applications/Arduino.app/Contents/Java/hardware/tools/avr/
 ### or on Linux: (remove the one you don't want)
 # AVR_TOOLS_DIR     = /usr
