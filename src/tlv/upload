@@ -1,1 +1,0 @@
-/Users/rusty/Library/Arduino15/packages/arduino/tools/avrdude/6.3.0-arduino14/bin/avrdude -C/Users/rusty/Library/Arduino15/packages/arduino/tools/avrdude/6.3.0-arduino14/etc/avrdude.conf -v -patmega328p -carduino -P/dev/cu.usbserial-14110 -b57600 -D -Uflash:w:/var/folders/3r/5qq8j72s5pddg46wmzk_x7lr0000gn/T/arduino_build_397649/tlv.ino.hex:i
