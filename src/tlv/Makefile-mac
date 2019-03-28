@@ -1,0 +1,46 @@
+# BOARDS = /home/pi/Applications/Arduino/Content/Java/hardware/arduino/avr/boards.txt
+BOARDS_TXT = /home/pi/Arduino/arduino-1.8.8/hardware/arduino/avr/boards.txt
+
+ARDMK_DIR=/home/pi/src/arduino/vendor/Arduino-Makefile
+# ARDIUNO_DIR = /Users/pi/Applications/Arduino/Content/Java
+# ARDIUNO_LIBS = 
+# BOARD_TAG = uno
+# include /Users/pi/src/arduino/vendor/Arduino-Makefile/Arduino.mk
+
+MONITOR_PORT = /dev/ttyUSB0
+SERIAL_PORT = /dev/ttyUSB0
+
+### DISCLAIMER
+### This is an example Makefile and it MUST be configured to suit your needs.
+### For detailed explanations about all of the available options, please refer
+### to https://github.com/sudar/Arduino-Makefile/blob/master/arduino-mk-vars.md
+### Original project where this Makefile comes from: https://github.com/WeAreLeka/Bare-Arduino-Project
+
+### PROJECT_DIR
+### This is the path to where you have created/cloned your project
+PROJECT_DIR       = /home/pi/src/arduino/src/i2c
+
+### ARDMK_DIR
+### Path to the Arduino-Makefile directory.
+# ARDMK_DIR         = $(PROJECT_DIR)/Arduino-Makefile
+### ARDUINO_DIR
+### Path to the Arduino application and resources directory.
+### On OS X:
+# ARDUINO_DIR       = /Applications/Arduino.app/Contents/Java
+### or on Linux: (remove the one you don't want)
+ARDUINO_DIR       = /usr/share/arduino
+
+### USER_LIB_PATH
+### Path to where the your project's libraries are stored.
+USER_LIB_PATH    :=  $(PROJECT_DIR)/lib
+
+### BOARD_TAG
+### It must be set to the board you are currently using. (i.e uno, mega2560, etc.)
+# BOARD_TAG         = atmega328p
+BOARD_TAG	= nano 
+BOARD_SUB 	= atmega328
+
+ARDUINO_LIBS = Wire
+
+### Do not touch - the path to Arduino.mk, inside the ARDMK_DIR
+include $(ARDMK_DIR)/Arduino.mk
