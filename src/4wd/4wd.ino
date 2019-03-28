@@ -17,6 +17,11 @@
 //include motor code
 #include "TBMotor.h"
 
+int m1 = 0;
+int m2 = 0;
+int m3 = 0;
+int m4 = 0;
+
 OseppTBMotor Motor1(12, 11);
 OseppTBMotor Motor2(8, 3);
 OseppTBMotor Motor3(7, 6);
@@ -24,15 +29,14 @@ OseppTBMotor Motor4(4, 5);
 
 void setup() {
   Serial.begin(115200);
-  updateIMU();
+  //updateIMU();
   //Change the timer frequency
   //To avoid the frequency of hearing.
-  TCCR2B &= ~7;
-  TCCR2B |= 1;
+  //TCCR2B &= ~7;
+  //TCCR2B |= 1;
 }
 
-
-
+/*
 const float offset_a = 2;
 
 int leftSpeed;
@@ -52,6 +56,7 @@ float PID_Balance(float e, float kp, float ki, float kd)
   es = e;
   return r;
 }
+
 void PIDSetSpeed()
 {
   leftSpeed = rightSpeed = PID_Balance(angle+ctrlwalk, 20, 1, 60);
@@ -64,13 +69,18 @@ void PIDSetSpeed()
   if (leftSpeed > 255)leftSpeed = 255; else if (leftSpeed < -255)leftSpeed = -255;
   if (rightSpeed > 255)rightSpeed = 255; else if (rightSpeed < -255)rightSpeed = -255;
 }
-
+*/
 void loop() {
-  old_loop();
+  ProcessCommand();
+  Motor1.SetSpeed(m1);   
+  Motor2.SetSpeed(m2);
+  Motor3.SetSpeed(m3);
+  Motor4.SetSpeed(m4);
 }
 
+/*
 void old_loop() {
-
+  
   ProcessCommand();
   Motor1.SetSpeed(200);
   Motor2.SetSpeed(200);
@@ -95,7 +105,7 @@ void old_loop() {
     Motor2.SetSpeed(-0);
   }
 }
-
+*/
 void ProcessCommand()
 {
   static unsigned long lastCmdIn = 0;
@@ -106,6 +116,26 @@ void ProcessCommand()
     lastCmdIn = millis();
     switch (c)
     {
+      case '1':
+         m1 += 50;
+        if (m1 > 255) m1 = 0;
+        break;
+          
+      case '2':
+        m2 += 50;
+        if (m2 > 255) m2 = 0;
+        break;
+
+      case '3':
+        m3 += 50;
+        if (m3 > 255) m3 = 0;
+        break;
+        
+      case '4':
+        m4 += 50;
+        if (m4 > 255) m4 = 0;
+        break;
+        /*
       case 'U': case 'u':
         ctrlwalk = 2;
         break;
@@ -126,6 +156,7 @@ void ProcessCommand()
         break;
       case 'D':
         break;
+        */
       default:
         break;
     }
