@@ -9,7 +9,7 @@
 // Configurable variables
 int delay_time = 100;
 
-Joystick *joy = new Joystick();
+Joystick *joy = new Joystick(0, 1, 2);
 Distance *dist;
 
 void setup() {

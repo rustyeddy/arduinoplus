@@ -1,12 +1,8 @@
 #include <Wire.h>
 
-<<<<<<< HEAD
 #define SLAVE_ADDRESS 0x12
-=======
 #define SLAVE_ADDRESS 0x04
 
-
->>>>>>> 7c3b937b748f4fe59cc75dae7d0645d9edee74dd
 int number = 0;
 int state  = 0;
 

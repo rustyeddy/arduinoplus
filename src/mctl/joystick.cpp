@@ -1,7 +1,6 @@
 #include <Arduino.h>
 #include "joystick.h"
 
-Joystick::Joystick() {}
 Joystick::Joystick(int x, int y, int sw) {
   Setup(x, y, sw);
 }
