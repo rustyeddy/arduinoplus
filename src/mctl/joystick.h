@@ -3,20 +3,15 @@
 
 class Joystick {
 private:
-  int active = 0;
-  int pinX;
-  int pinY;
-  int pinSW;
-  int lastX, lastY, lastSW;
-  int report_changes = 0;
+    int active = 0;
+    int _pinX,_pinY, _pinSW;	// active pins
+    int _lastX, lastY, lastSW;	// last values 
 
 public:
-  Joystick(int x, int y, int sw);
-
-  void Setup(int x, int y, int sw);
-  void ReportChanges(int yes);
-  void Report();
+    int ReportChanges = 0;
+    Joystick();
+    Joystick(int x, int y, int sw);
+    void Setup(int x, int y, int sw);
 };
-
 
 #endif // _JOYSTICK_H_

@@ -1,26 +1,8 @@
-#include <Arduino.h>
-#include <Wire.h>
-#include "i2c.h"
-#include "cmd.h"
+#ifndef __TLV_H__
+#define __TLV_H__
 
-#define I2C_BUFSIZ	0xff	// TLV_BUFSIZ
-#define I2C_OUR_ADDR	0x11	// Change if our addr is to change
-
-char i2c_tlv[I2C_BUFSIZ];	// TLV
-byte i2c_ouraddr = I2C_OUR_ADDR;
-
-void i2c_setup() {
-  // Become a slave on the i2c bus
-  Wire.begin(i2c_ouraddr);
-  Wire.onReceive(i2c_buffer);
-}
-
-char read_byte() {
-    Wire.read();
-}
-
-// i2c_gettlv
-int i2c_gettlv(char *buf, int size) {
+// int get_tlv(char *buf)
+int get_tlv(char *buf, int size) {
     int len = -1; // -1 means not set
 
     if (size == 0) goto finished;
@@ -33,7 +15,7 @@ int i2c_gettlv(char *buf, int size) {
     }
 
     // read the type!
-    buf[0] = read_byte();
+    buf[0] = Wire.read();
 
     // check if this is a compact message, set len to 1 and return
     if (buf[0] >= 0xC0) {
@@ -70,3 +52,4 @@ int i2c_gettlv(char *buf, int size) {
     return len;
 }
 
+// __TLV_H__

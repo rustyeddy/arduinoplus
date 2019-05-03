@@ -1,26 +1,27 @@
 #include <Arduino.h>
 #include "joystick.h"
 
-Joystick::Joystick(int x, int y, int sw) {
-  Setup(x, y, sw);
-}
+Joystick::Joystick() {
+    Setup(0, 0, 0);
+};
 
-void Joystick::ReportChanges(int yes) {
-  report_changes = yes;
-}
+Joystick::Joystick(int x, int y, int b) {
+    Setup(x, y, b);
+};
 
-void
-Joystick::Setup(int x, int y, int sw) {
-  pinX = x;
-  pinY = y;
-  pinSW = sw;
+void Joystick::Setup(int x, int y, int sw) {
+    _pinX = x;
+    _pinY = y;
+    _pinSW = sw;
 
-  // The last numbers
-  lastX = lastY = 0;
-  lastSW = 77; // a nonsense number forcing it to be reset
-  pinMode(pinSW, INPUT);
-  digitalWrite(pinSW, HIGH);
-  ReportChanges(0);
+    // The last numbers
+    _lastX = lastY = 0;
+    _lastSW = 77; // a nonsense number forcing it to be reset
+    pinMode(pinSW, INPUT);
+    digitalWrite(pinSW, HIGH);
+
+    // Turn off report changes by default
+    ReportChanges = 0;
 };
 
 /*
@@ -28,36 +29,49 @@ Joystick::Setup(int x, int y, int sw) {
  * or it will only send a packet when something has changed, depending
  * on the report_changes flag.
  */
-void
-Joystick::Report() {
-  int sw = digitalRead(pinSW);
-  int x = analogRead(pinX);
-  int y = analogRead(pinY);
+tlv Joystick::Report() {
+    tlv char[6];
+    tlv[0] = 0x02;
+    tlv[1] = 0x03;
 
-  // Report changes is broken!
-  if (report_changes == 1) {
-    if (lastSW == sw && lastX == x && lastY == y) {
-      goto finished;
+    int sw = digitalRead(_pinSW);
+    int x = analogRead(_pinX);
+    int y = analogRead(_pinY);
+
+    // Report changes is broken!
+    if (report_changes == 1) {
+	if (_lastSW == sw && _lastX == x && _lastY == y) {
+	    goto finished;
+	}
+	
+	int dx = x - _lastX;
+	int dy = y - _lastY;
+	int dsw = _lastSW - sw;
+	tlv[2] = dx;
+	tlv[3] = dy;
+	tlv[4] = dsw;
+	tlv[5] = '\n';
+    } else {
+	tlv[2] = sw;
+	tlv[3] = x;
+	tlv[4] = y;
+	tlv[5] = '\n';
     }
-    int dx = x - lastX;
-    int dy = y - lastY;
-    int dsw = lastSW - sw;
-
     Serial.print("jd:"); Serial.print(dsw);
     Serial.print(":"); Serial.print(dx);
     Serial.print(":"); Serial.println(dy);
-  } else {
+} else {
     Serial.print("jc:"); Serial.print(sw);
     Serial.print(":"); Serial.print(x);
     Serial.print(":"); Serial.println(y);
-  }
+ }
 
   // Alternative
   // msg[0] = 'j'; msg[1] = 6; msg[2:3] = x; y = msg[4:5]; sw = msg[6];
   // TLV above
 
  finished:
-  lastX = x;
-  lastY = y;
-  lastSW = sw;
+  _lastX = x;
+  _lastY = y;
+  _lastSW = sw;
 }
