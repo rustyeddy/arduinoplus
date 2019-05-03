@@ -84,6 +84,13 @@ void ProcessCommand()
     lastCmdIn = millis();
     switch (c)
     {
+      case '0':
+        m1 = 0;
+        m2 = 0;
+        m3 = 0;
+        m4 = 0;
+        break;
+        
       case '1':
         s1 += 50;
         if (s1 > 255) s1 = 0;
