@@ -12,8 +12,8 @@
 #include "LED.h"
 
 //int pin = LED_BUILTIN;
-int greenLed = D1;
-int redLed = D2;
+int greenLed = 1;
+int redLed = 2;
 
 LED *red, *green;
 
