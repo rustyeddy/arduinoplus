@@ -3,6 +3,7 @@
 // #include "TBMotor.h"
 #include "tlvs.h"
 #include "motors.h"
+#include "serial.h"
 
 int s1 = 500;
 int s2 = 500;
@@ -16,9 +17,10 @@ OseppTBMotor m2(8, 3);
 OseppTBMotor m4(4, 5);
 
 int dotcnt = 0;
+int debug = 1;
 
 void setup() {
-  Serial.begin(115200);
+    Serial.begin(115200);
 }
 
 // Create buffers for incoming serial command and the corresponding
@@ -29,47 +31,9 @@ void setup() {
 // The incoming raw data (line of input) will be coped to another buffer
 // making it *immutable*, to be parsed into an array of strings (or a
 // map of strings indexed by strings)...
-static char _incoming_buffer[MAX_LINE_SIZE];
 static int dodelay = 1;
 
 int delay_millis = 500;
-
-// serial_newline() will read from the serial port a string upto a newline
-// or line termination character.  If nothing is available at the prompt
-// a null string will be returned.
-int serial_newline(char *buffer, int maxline) {
-    char *ptr = buffer;
-    int count = 0;
-    // gobble up what we can get, expect a nl or \0 to terminate
-    while (Serial.available() > 0 && count < maxline) {
-
-	// Get the next character waiting
-	int ch = Serial.read();
-	switch (ch) {
-	case '\0':
-	case '\n':
-	case '\r':
-	    *ptr = '\0';
-	    Serial.println(""); Serial.print(" EOString == > "); Serial.println(_incoming_buffer);
-	    break;
-	case -1:
-	    Serial.print("ERROR reading input: "); Serial.println(_incoming_buffer);
-	    break;
-	default:
-	    count++;
-	    *ptr++ = ch;
-	}
-    }
-
-    if (dotcnt >= 69) {
-	Serial.println("<cr>");
-	dotcnt = 0;
-    } else {
-	Serial.print(".");
-	dotcnt++;
-    }
-    return count;
-}
 
 // Round and Round we go ...
 void loop() {
@@ -77,7 +41,7 @@ void loop() {
     char *cmd = NULL;
 
     // The following function will not block, null will be returned
-    // if there is nothing to be read
+
     int count = serial_newline(_incoming_buffer, MAX_LINE_SIZE);
     if (count <= 0) {
 	dodelay = 1; // go ahead sure we delay next round
@@ -94,8 +58,9 @@ void loop() {
 	goto next;
     }
 
-    Serial.println("Successfully Read Message");
-
+    if (debug) {
+	Serial.println("Successfully Read Message");	
+    }
     cmd  = msg->get_cmd();
     if (strcmp(cmd, "mot")) {
 	// we will expect L & R speeds
@@ -103,7 +68,7 @@ void loop() {
     }
 
     msg->dump();
-    dump(_incoming_buffer, 256);
+    // dump(_incoming_buffer, 256);
 
  next:
     // re-initialize the entire buffer for the next incoming!

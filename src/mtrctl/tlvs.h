@@ -14,10 +14,13 @@ class TLVS {
     int _err = 0;      // no error yet
     int _msg_num = 0;
     char _delim = ':'; // configurable delimiter
+    int _debug = 0;
 
     char *_parsed_buf;
     char *_raw_buf;
     char *_args[MAX_ARGS];
+
+    
 
     void _reset_args() {
 	_argc = 0;
@@ -73,8 +76,10 @@ class TLVS {
 	int i = 0;
 	for (; i < len; i++){
 	    if (newword) {
-		Serial.print("neword saving argc ~ "); Serial.println(_argc); 
-		Serial.print("\tsaved ... "); Serial.println(_args[_argc]);
+		if (_debug) {
+		    Serial.print("neword saving argc ~ "); Serial.println(_argc); 
+		    Serial.print("\tsaved ... "); Serial.println(_args[_argc]);
+		}
 		_argc += 1;
 		_args[_argc] = &_parsed_buf[i]; // saving the next param
 		newword = 0;
