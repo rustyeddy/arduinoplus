@@ -1,6 +1,8 @@
 #ifndef __TLVS_H__
 #define __TLVS_H__
 
+#include <Arduino.h>
+
 #define MAX_LINE_SIZE	256
 #define MAX_ARGS	10
 
@@ -19,8 +21,6 @@ class TLVS {
     char *_parsed_buf;
     char *_raw_buf;
     char *_args[MAX_ARGS];
-
-    
 
     void _reset_args() {
 	_argc = 0;

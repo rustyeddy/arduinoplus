@@ -3,7 +3,7 @@
 
 // Just for the serial 
 static char _incoming_buffer[MAX_LINE_SIZE];
-static int _debug = 0;
+static int _debug = 1;
 
 // serial_newline() will read from the serial port a string upto a newline
 // or line termination character.  If nothing is available at the prompt

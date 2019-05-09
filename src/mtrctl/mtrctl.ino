@@ -5,17 +5,6 @@
 #include "motors.h"
 #include "serial.h"
 
-int s1 = 500;
-int s2 = 500;
-int s3 = 500;
-int s4 = 500;
-
-OseppTBMotor m1(12, 11); // these are SPI chips
-OseppTBMotor m3(7, 6);
-
-OseppTBMotor m2(8, 3);
-OseppTBMotor m4(4, 5);
-
 int dotcnt = 0;
 int debug = 1;
 
@@ -66,9 +55,7 @@ void loop() {
 	// we will expect L & R speeds
 	do_motors(msg);
     }
-
     msg->dump();
-    // dump(_incoming_buffer, 256);
 
  next:
     // re-initialize the entire buffer for the next incoming!
