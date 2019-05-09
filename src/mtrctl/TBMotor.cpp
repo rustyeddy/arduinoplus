@@ -16,7 +16,7 @@ void OseppTBMotor::forward(uint8_t speed)
     analogWrite( _pwm_pin, speed);
 }
 
-void OseppTBMotor::backward(uint8_t speed)
+void OseppTBMotor::reverse(uint8_t speed)
 {
     analogWrite( _pwm_pin, 0);
     digitalWrite(_dir_pin, LOW);

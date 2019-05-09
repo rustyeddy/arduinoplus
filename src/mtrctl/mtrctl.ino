@@ -1,15 +1,16 @@
-
 //include motor code
 // #include "TBMotor.h"
+#include "global.h"
 #include "tlvs.h"
 #include "motors.h"
 #include "serial.h"
 
 int dotcnt = 0;
-int debug = 1;
+char incoming_buffer[MAX_LINE];
 
 void setup() {
     Serial.begin(115200);
+    clear_buffer(incoming_buffer);
 }
 
 // Create buffers for incoming serial command and the corresponding
@@ -27,66 +28,40 @@ int delay_millis = 500;
 // Round and Round we go ...
 void loop() {
     TLVS *msg = NULL;
-    char *cmd = NULL;
 
     // The following function will not block, null will be returned
 
-    int count = serial_newline(_incoming_buffer, MAX_LINE_SIZE);
+    int count = serial_newline(incoming_buffer, MAX_LINE);
     if (count <= 0) {
 	dodelay = 1; // go ahead sure we delay next round
 	goto next;
     }
 
-    Serial.println(""); Serial.print("We gots us a new command: ");
-    Serial.println(_incoming_buffer);
+    if (debug_serial) {
+	Serial.println(""); Serial.print("We gots us a new command: ");
+	Serial.println(incoming_buffer);
+    }
 
     // TLVs will parse the incoming newline into a argument array
-    msg = new TLVS(_incoming_buffer);
+    msg = new TLVS(incoming_buffer);
     if (msg == NULL) {
-	Serial.println("Error reading next message");
+	Serial.println("err:0:Error reading next message");
 	goto next;
     }
 
-    if (debug) {
-	Serial.println("Successfully Read Message");	
+    if (debug_serial) {
+	Serial.println("Successfully Parsed Message");	
     }
-    cmd  = msg->get_cmd();
-    if (strcmp(cmd, "mot")) {
-	// we will expect L & R speeds
-	do_motors(msg);
+
+    msg->do_command();
+    if (debug_serial) {
+	msg->dump();	
     }
-    msg->dump();
 
  next:
     // re-initialize the entire buffer for the next incoming!
-    if (_incoming_buffer[0] != '\0') {
-	int slen = strlen(_incoming_buffer);
-	if (slen > 0) {
-	    for (unsigned int i = 0; i < strlen(_incoming_buffer); i++) {
-		_incoming_buffer[i] = '\0';
-	    }
-	}
-    }
-
+    clear_buffer(incoming_buffer);
     if (dodelay) {
 	delay(delay_millis);
     }
-}
-
-void dump(char *buf, int size) {
-    Serial.println("packet");
-    
-    for (int i = 0; i < size; i++) {
-	char ch = buf[i];
-	if ((i % 16) == 0) {
-	    Serial.println();
-	}
-
-	if (isPrintable(ch)) {
-	    Serial.print(ch);
-	} else {
-	    Serial.print(".");
-	}
-    }
-    Serial.println();
 }
