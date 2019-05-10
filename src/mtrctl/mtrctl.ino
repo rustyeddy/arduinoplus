@@ -7,6 +7,7 @@
 
 int dotcnt = 0;
 char incoming_buffer[MAX_LINE];
+unsigned long last_time = 0;
 
 void setup() {
     Serial.begin(115200);
@@ -28,7 +29,7 @@ int delay_millis = 500;
 // Round and Round we go ...
 void loop() {
     TLVS *msg = NULL;
-
+    unsigned long now = 0;
     // The following function will not block, null will be returned
 
     int count = serial_newline(incoming_buffer, MAX_LINE);
@@ -56,6 +57,12 @@ void loop() {
     msg->do_command();
     if (debug_serial) {
 	msg->dump();	
+    }
+
+    now = millis();
+    if (now - last_time > 5000)  {
+	Serial.println("msg://helo/version=1");
+	last_time = now;
     }
 
  next:
