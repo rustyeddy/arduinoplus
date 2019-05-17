@@ -1,7 +1,7 @@
 # Arduino Software
 
-These repo is a collection of Arduino sketches that achieve a variety
-of useful tasks, but are not necessarily a project within themselves,
+This repo is a collection of Arduino sketches that do a variety
+of useful things, but are not necessarily a project within themselves,
 they play more of a supporting role for the MBR architecture.
 
 ## Sketches include

@@ -22,9 +22,9 @@ Distance::Distance(int trig, int echo) {
 }
 
 void Distance::Report() {
-  //a = sr04.DistanceAvg(10, 5);
-  long cm = sr04.Distance();
+    //a = sr04.DistanceAvg(10, 5);
+    long cm = sr04.Distance();
   
-  Serial.print("cm:");
-  Serial.println(cm);
+    Serial.print("cm:");
+    Serial.println(cm);
 }
